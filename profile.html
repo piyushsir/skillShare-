@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cart.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-bar">
+          <i class='bx bx-menu sidebarOpen'></i>
+          <span class="logo navLogo"><a href="#">SkillShare</a></span>
+    
+          <div class="menu">
+            <div class="logo-toggle">
+              <span class="logo"><a href="#">SkillShare</a></span>
+              <i class='bx bx-x siderbarClose'></i>
+            </div>
+    
+            <ul class="nav-links">
+              <li><a href="userpage.html">Home</a></li>
+              <li> <div class="dropdown">
+                <button class="dropbtn">Category
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="ds.html">Data Structures</a>
+                  <a href="db.html">Database</a>
+                  <a href="maths.html">Maths</a>
+                </div>
+              
+             </li>
+              <li><a href="contact.html" >Contact Us</a></li>
+              
+              <li><a href="#"><img src="icon.png"></a></li>
+            </ul>
+          </div>
+    
+          <div class="darkLight-searchBox">
+            <div class="dark-light">
+             
+            </div>
+    
+            <div class="searchBox">
+              <div class="searchToggle">
+                <i class='bx bx-x cancel'></i>
+                <i class='bx bx-search search'></i>
+              </div>
+     
+              <div class="search-field">
+                <input type="text" placeholder="Search...">
+                <i class='bx bx-search'></i>
+              </div>
+            </div>
+            <ul class="nav-links">
+            <li><div class="dropdown">
+                <button class="dropbtn"><img src="userprofile.png">
+                </button>
+                <div class="dropdown-content">
+                  <a href="ds.html">View profile</a>
+                  <a href="db.html">Logout</a>
+                </div></li>
+                <li>
+                    <div class="logo-toggle">
+                        <span class="logo"><a href="#">
+                        <i class='bx bx-x siderbarClose'></i>
+                      </div>
+                </li>
+            </ul>
+            </div>
+        </div>
+      </nav>
+      <br>
+      <br>
+      <br>
+       <br>
+       <br>
+       <br>
+       
+    
+<script>
+    var taxRate = 0.05;
+var shippingRate = 15.00; 
+var fadeTime = 300;
+
+
+/* Assign actions */
+$('.product-quantity input').change( function() {
+  updateQuantity(this);
+});
+
+$('.product-removal button').click( function() {
+  removeItem(this);
+});
+
+
+/* Recalculate cart */
+function recalculateCart()
+{
+  var subtotal = 0;
+  
+  /* Sum up row totals */
+  $('.product').each(function () {
+    subtotal += parseFloat($(this).children('.product-line-price').text());
+  });
+  
+  /* Calculate totals */
+  var tax = subtotal * taxRate;
+  var shipping = (subtotal > 0 ? shippingRate : 0);
+  var total = subtotal + tax + shipping;
+  
+  /* Update totals display */
+  $('.totals-value').fadeOut(fadeTime, function() {
+    $('#cart-subtotal').html(subtotal.toFixed(2));
+    $('#cart-tax').html(tax.toFixed(2));
+    $('#cart-shipping').html(shipping.toFixed(2));
+    $('#cart-total').html(total.toFixed(2));
+    if(total == 0){
+      $('.checkout').fadeOut(fadeTime);
+    }else{
+      $('.checkout').fadeIn(fadeTime);
+    }
+    $('.totals-value').fadeIn(fadeTime);
+  });
+}
+
+
+/* Update quantity */
+function updateQuantity(quantityInput)
+{
+  /* Calculate line price */
+  var productRow = $(quantityInput).parent().parent();
+  var price = parseFloat(productRow.children('.product-price').text());
+  var quantity = $(quantityInput).val();
+  var linePrice = price * quantity;
+  
+  /* Update line price display and recalc cart totals */
+  productRow.children('.product-line-price').each(function () {
+    $(this).fadeOut(fadeTime, function() {
+      $(this).text(linePrice.toFixed(2));
+      recalculateCart();
+      $(this).fadeIn(fadeTime);
+    });
+  });  
+}
+
+
+/* Remove item from cart */
+function removeItem(removeButton)
+{
+  /* Remove row from DOM and recalc cart total */
+  var productRow = $(removeButton).parent().parent();
+  productRow.slideUp(fadeTime, function() {
+    productRow.remove();
+    recalculateCart();
+  });
+}
+
+
+const body = document.querySelector("body"),
+nav = document.querySelector("nav"),
+modeToggle = document.querySelector(".dark-light"),
+searchToggle = document.querySelector(".searchToggle"),
+sidebarOpen = document.querySelector(".sidebarOpen"),
+siderbarClose = document.querySelector(".siderbarClose");
+
+let getMode = localStorage.getItem("mode");
+if (getMode && getMode === "dark-mode") {
+body.classList.add("dark");
+}
+
+// js code to toggle dark and light mode
+modeToggle.addEventListener("click", () => {
+modeToggle.classList.toggle("active");
+body.classList.toggle("dark");
+
+// js code to keep user selected mode even page refresh or file reopen
+if (!body.classList.contains("dark")) {
+  localStorage.setItem("mode", "light-mode");
+} else {
+  localStorage.setItem("mode", "dark-mode");
+}
+});
+
+// js code to toggle search box
+searchToggle.addEventListener("click", () => {
+searchToggle.classList.toggle("active");
+});
+
+
+//   js code to toggle sidebar
+sidebarOpen.addEventListener("click", () => {
+nav.classList.add("active");
+});
+
+body.addEventListener("click", e => {
+let clickedElm = e.target;
+
+if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
+  nav.classList.remove("active");
+}
+});
+
+</script>
+</body>
+</html>

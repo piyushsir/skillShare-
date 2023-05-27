@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login1.css">
+    <title>login</title>
+</head>
+<body>
+    <div class="hero">
+        <img class="hero" src="banner1.jpg">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="signup()">Sign Up</button>
+            </div>
+            <div class="social-icon">
+                <img src="fb.png">
+                <img src="tw.png">
+                <img src="gp.png">
+            </div>
+            <form id="login" class="input-group" method="post" action="first.php">
+                <input type="text" class="input-field" name="userid1" id="userid1" placeholder="User Id" required>
+                <input type="password" class="input-field" name="pass1" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>Remember Password</span>
+                <input type="submit" class="submit-btn" name="login" onclick="handle()" value="Log In">
+            </form>
+            <form id="signup" class="input-group" method="post" action="first.php">
+                <input type="text" class="input-field" name="userid2" placeholder="User Id" required>
+                <input type="password" class="input-field" name="pass2"  placeholder="Enter Password" required>
+                <input type="email" class="input-field" name="email2" placeholder="Email Id" required>
+                <input type="checkbox" class="check-box"><span>I agree to the terms and conditions</span>
+                <input type="submit" class="submit-btn" name="signup" value="Sign Up">
+            </form>
+        </div>
+       
+    </div>
+    <script>
+        var x =document.getElementById("login");
+        var y =document.getElementById("signup");
+        var z =document.getElementById("btn");
+        function signup(){
+            x.style.left="-400px";
+            y.style.left="50px";
+            z.style.left="110px";
+        }
+        function login(){
+            x.style.left="50px";
+            y.style.left="450px";
+            z.style.left="0px";
+        }
+        function handle()
+        {
+            const name=document.getElementById('userid1').value;
+            localStorage.setItem("NAME",name);
+            return;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="contact.css">
+    
+
+  <!-- ===== Boxicons CSS ===== -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+  <!--<title>Responsive Navigation Menu Bar</title>-->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>contact us</title>
+</head>
+<body>
+  <nav id="navbar">
+    <div class="nav-bar">
+      <i class='bx bx-menu sidebarOpen'></i>
+      <span class="logo navLogo"><a href="#">Skillshare</a></span>
+
+      <div class="menu">
+        <div class="logo-toggle">
+          <span class="logo"><a href="#">Skillshare</a></span>
+          <i class='bx bx-x siderbarClose'></i>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li> <div class="dropdown">
+            <button class="dropbtn">Category 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="ds.html">Data Structures</a>
+              <a href="db.html">Database</a>
+              <a href="maths.html">Maths</a>
+            </div>
+          </div> </li>
+          <li><a href="contact.html" >Contact Us</a></li>
+          <li><a href="login.html" >Login/Sign up</a></li>+
+
+        </ul>
+      </div>
+
+      <div class="darkLight-searchBox">
+        <div class="dark-light">
+          
+        </div>
+
+        <div class="searchBox">
+          <div class="searchToggle">
+            <i class='bx bx-x cancel'></i>
+            <i class='bx bx-search search'></i>
+          </div>
+
+          <div class="search-field">
+            <input type="text" placeholder="Search...">
+            <i class='bx bx-search'></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+    <div class="background">
+        <div class="container">
+          <div class="screen">
+            <div class="screen-header">
+              <div class="screen-header-left">
+                <div class="screen-header-button close"></div>
+                <div class="screen-header-button maximize"></div>
+                <div class="screen-header-button minimize"></div>
+              </div>
+              <div class="screen-header-right">
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+                <div class="screen-header-ellipsis"></div>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="screen-body-item left">
+                <div class="app-title">
+                  <span>CONTACT</span>
+                  <span>US</span>
+                </div>
+                <div class="app-contact">CONTACT INFO : 921073 90 47</div>
+              </div>
+              <form method="post" action="help.php">
+              <div class="screen-body-item">
+                <div class="app-form">
+                  <div class="app-form-group">
+                    <input class="app-form-control" placeholder="NAME" name="name">
+                  </div>
+                  <div class="app-form-group">
+                    <input class="app-form-control" placeholder="EMAIL" name="emailid">
+                  </div>
+                  <div class="app-form-group message">
+                    <input class="app-form-control" placeholder="MESSAGE" name="message">
+                  </div>
+                  <div class="app-form-group buttons">
+                    <a href="help.php" ><button class="app-form-button" name="send">SEND</button></a>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+          <script>
+            const body = document.querySelector("body"),
+      nav = document.querySelector("nav"),
+      modeToggle = document.querySelector(".dark-light"),
+      searchToggle = document.querySelector(".searchToggle"),
+      sidebarOpen = document.querySelector(".sidebarOpen"),
+      siderbarClose = document.querySelector(".siderbarClose");
+
+    let getMode = localStorage.getItem("mode");
+    if (getMode && getMode === "dark-mode") {
+      body.classList.add("dark");
+    }
+
+    // js code to toggle dark and light mode
+    modeToggle.addEventListener("click", () => {
+      modeToggle.classList.toggle("active");
+      body.classList.toggle("dark");
+
+      // js code to keep user selected mode even page refresh or file reopen
+      if (!body.classList.contains("dark")) {
+        localStorage.setItem("mode", "light-mode");
+      } else {
+        localStorage.setItem("mode", "dark-mode");
+      }
+    });
+
+    // js code to toggle search box
+    searchToggle.addEventListener("click", () => {
+      searchToggle.classList.toggle("active");
+    });
+
+
+    //   js code to toggle sidebar
+    sidebarOpen.addEventListener("click", () => {
+      nav.classList.add("active");
+    });
+
+    body.addEventListener("click", e => {
+      let clickedElm = e.target;
+
+      if (!clickedElm.classList.contains("sidebarOpen") && !clickedElm.classList.contains("menu")) {
+        nav.classList.remove("active");
+      }
+    });
+          </script>
+             
+       
+      
+</body>
+</html>
